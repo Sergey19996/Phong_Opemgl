@@ -22,11 +22,11 @@ public:
 	//load (and generates) a shader program from file loading vertex, fregment (and geometry) shader's source code. if gShaderFile is not nullptr, it aslo loads a geometry shader
 	static Shader LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
 	//retrieves a stored shader (извлекает)
-	static Shader GetShader(std::string name);
+	static Shader& GetShader(std::string name);
 	//load (and generate) a texture from file
 	static Texture2D LoadTexture(const char* file, bool alpha, std::string name);
 	//retrieves a stored texture
-	static Texture2D GetTexture(std::string name);
+	static Texture2D& GetTexture(std::string name);
 	//properly de-allocates all loaded resources
 	static void clear();
 

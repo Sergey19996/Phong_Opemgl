@@ -138,6 +138,7 @@
     <ClCompile Include="src\graphics\rendering\Shader.cpp" />
     <ClCompile Include="src\graphics\rendering\Texture.cpp" />
     <ClCompile Include="src\graphics\ResourceManager.cpp" />
+    <ClCompile Include="src\graphics\SpriteRenderer.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +146,11 @@
     <ClInclude Include="src\graphics\rendering\Shader.h" />
     <ClInclude Include="src\graphics\rendering\Texture.h" />
     <ClInclude Include="src\graphics\ResourceManager.h" />
+    <ClInclude Include="src\graphics\SpriteRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\fragmentShader.glsl" />
+    <None Include="Assets\Shaders\vertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

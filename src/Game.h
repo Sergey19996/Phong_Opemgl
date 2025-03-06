@@ -22,6 +22,10 @@ public:
 	void ProcessInput(float dt);
 	void Update(float dt);
 	void Render();
+
+
+	
+
 };
 
 #endif // !GAME_H

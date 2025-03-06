@@ -19,7 +19,7 @@ Shader ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderF
     return Shaders[name];
 }
 
-Shader ResourceManager::GetShader(std::string name)
+Shader& ResourceManager::GetShader(std::string name)
 {
     return Shaders[name];
 }
@@ -30,7 +30,7 @@ Texture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string
     return Textures[name];
 }
 
-Texture2D ResourceManager::GetTexture(std::string name)
+Texture2D& ResourceManager::GetTexture(std::string name)
 {
    
     return Textures[name];
@@ -87,7 +87,7 @@ Shader ResourceManager::loadShaderFromFile(const char* vShaderFile, const char* 
     const char* gShaderCode = geometryCode.c_str();
     //2. now create shader object from source code
     Shader shader;
-    shader.Compile(vShaderCode, fShaderCode, gShaderCode != nullptr ? gShaderCode : nullptr);
+    shader.Compile(vShaderCode, fShaderCode, geometryCode.empty() ? nullptr : gShaderCode);
 
     return shader;
 }
