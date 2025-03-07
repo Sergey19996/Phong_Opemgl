@@ -1,11 +1,22 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+
+#include "gameLevel.h"
+
 enum GameState{
 	GAME_ACTIVE,
 	GAME_MENU,
 	GAME_WIN
 };
+
+// Initial size of the player paddle
+const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
+// Initial velocity of the player paddle
+const float PLAYER_VELOCITY(500.0f);
 
 class Game{
 public:
@@ -23,6 +34,8 @@ public:
 	void Update(float dt);
 	void Render();
 
+	std::vector<GameLevel> Levels;
+	unsigned int Level;
 
 	
 

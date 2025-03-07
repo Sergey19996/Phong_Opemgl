@@ -28,10 +28,13 @@ int main(int argc, char* argv[]) {
 #ifndef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif // !__APPLE__
-		glfwWindowHint(GLFW_RESIZABLE, false);
+
+		glfwWindowHint(GLFW_RESIZABLE, false); // можно ли скейлить окно
 		GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Breakout", nullptr, nullptr);
 		glfwMakeContextCurrent(window);
 
+		glfwSetKeyCallback(window, key_callback);  //подключаем клавиатуру
+		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); //подключаем возможность скейлить окно
 		//glad: load all opengl function pointers
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			std::cout << "Failed to initialize GLAD" << std::endl;
@@ -60,6 +63,8 @@ int main(int argc, char* argv[]) {
 
 			//manage user input
 			Breakout.ProcessInput(deltaTime); 
+
+			
 
 			//update game state
 			Breakout.Update(deltaTime);

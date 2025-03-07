@@ -134,6 +134,8 @@
   <ItemGroup>
     <ClCompile Include="Linking\lib\stb.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\gameLevel.cpp" />
+    <ClCompile Include="src\gameobject.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\graphics\rendering\Shader.cpp" />
     <ClCompile Include="src\graphics\rendering\Texture.cpp" />
@@ -143,6 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\gameLevel.h" />
+    <ClInclude Include="src\gameobject.h" />
     <ClInclude Include="src\graphics\rendering\Shader.h" />
     <ClInclude Include="src\graphics\rendering\Texture.h" />
     <ClInclude Include="src\graphics\ResourceManager.h" />
