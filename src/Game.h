@@ -3,9 +3,10 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
+#include <glm/glm.hpp> // математика
 
 #include "gameLevel.h"
+#include "BallObject.h"
 
 enum GameState{
 	GAME_ACTIVE,
@@ -13,10 +14,9 @@ enum GameState{
 	GAME_WIN
 };
 
-// Initial size of the player paddle
-const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
-// Initial velocity of the player paddle
-const float PLAYER_VELOCITY(500.0f);
+bool CheckCollision(GameObject& one, GameObject& two); //AABB - AABB collision
+bool CheckCollision(BallObject& ball, GameObject& two); // Circle -AABB collision
+//float clamp(float value, float min, float max);
 
 class Game{
 public:
@@ -36,7 +36,7 @@ public:
 
 	std::vector<GameLevel> Levels;
 	unsigned int Level;
-
+	void DoCollisions();
 	
 
 };

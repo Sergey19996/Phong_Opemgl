@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Linking\lib\stb.cpp" />
+    <ClCompile Include="src\BallObject.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\gameLevel.cpp" />
     <ClCompile Include="src\gameobject.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BallObject.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\gameLevel.h" />
     <ClInclude Include="src\gameobject.h" />

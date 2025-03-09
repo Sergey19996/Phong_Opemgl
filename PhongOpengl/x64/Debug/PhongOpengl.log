@@ -1,3 +1,2 @@
-﻿  main.cpp
-D:\C++\Learning\PhongOpengl\src\main.cpp(59,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Game.cpp
   PhongOpengl.vcxproj -> D:\C++\Learning\PhongOpengl\x64\Debug\PhongOpengl.exe
