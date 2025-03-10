@@ -4,9 +4,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp> // математика
-
 #include "gameLevel.h"
 #include "BallObject.h"
+#include <tuple>
+
+
 
 enum GameState{
 	GAME_ACTIVE,
@@ -14,9 +16,21 @@ enum GameState{
 	GAME_WIN
 };
 
+enum Direction {
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT
+};
+typedef std::tuple<bool, Direction, glm::vec2> Collision;
+
+
 bool CheckCollision(GameObject& one, GameObject& two); //AABB - AABB collision
-bool CheckCollision(BallObject& ball, GameObject& two); // Circle -AABB collision
+Collision CheckCollision(BallObject& ball, GameObject& two); // Circle -AABB collision 
 //float clamp(float value, float min, float max);
+
+Direction VectorDirection(glm::vec2 target); // <collision?, what direction?, difference vector center - closest point>
+
 
 class Game{
 public:
@@ -38,7 +52,9 @@ public:
 	unsigned int Level;
 	void DoCollisions();
 	
-
+	// reset
+	void ResetLevel();
+	void ResetPlayer();
 };
 
 #endif // !GAME_H

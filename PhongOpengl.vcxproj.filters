@@ -48,6 +48,9 @@
     <ClCompile Include="src\BallObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\rendering\Shader.h">
@@ -74,9 +77,14 @@
     <ClInclude Include="src\BallObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\vertexShader.glsl" />
     <None Include="Assets\Shaders\fragmentShader.glsl" />
+    <None Include="Assets\Shaders\vertexParticleShader.glsl" />
+    <None Include="Assets\Shaders\fragmentParticleShader.glsl" />
   </ItemGroup>
 </Project>

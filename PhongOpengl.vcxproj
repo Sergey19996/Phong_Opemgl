@@ -143,6 +143,7 @@
     <ClCompile Include="src\graphics\ResourceManager.cpp" />
     <ClCompile Include="src\graphics\SpriteRenderer.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BallObject.h" />
@@ -153,9 +154,12 @@
     <ClInclude Include="src\graphics\rendering\Texture.h" />
     <ClInclude Include="src\graphics\ResourceManager.h" />
     <ClInclude Include="src\graphics\SpriteRenderer.h" />
+    <ClInclude Include="src\Particle.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\fragmentParticleShader.glsl" />
     <None Include="Assets\Shaders\fragmentShader.glsl" />
+    <None Include="Assets\Shaders\vertexParticleShader.glsl" />
     <None Include="Assets\Shaders\vertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

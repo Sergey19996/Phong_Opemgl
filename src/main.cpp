@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
 
 		glfwSetKeyCallback(window, key_callback);  //подключаем клавиатуру
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); //подключаем возможность скейлить окно
+		glfwSwapInterval(1);
 		//glad: load all opengl function pointers
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			std::cout << "Failed to initialize GLAD" << std::endl;
