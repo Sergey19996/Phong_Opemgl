@@ -1,2 +1,3 @@
-﻿  Texture.cpp
+﻿  Game.cpp
+D:\C++\Learning\PhongOpengl\src\Game.cpp(171,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   PhongOpengl.vcxproj -> D:\C++\Learning\PhongOpengl\x64\Debug\PhongOpengl.exe

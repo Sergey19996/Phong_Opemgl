@@ -51,6 +51,9 @@
     <ClCompile Include="src\Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\postProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\rendering\Shader.h">
@@ -80,11 +83,16 @@
     <ClInclude Include="src\Particle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\postProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\vertexShader.glsl" />
     <None Include="Assets\Shaders\fragmentShader.glsl" />
     <None Include="Assets\Shaders\vertexParticleShader.glsl" />
     <None Include="Assets\Shaders\fragmentParticleShader.glsl" />
+    <None Include="Assets\Shaders\vertexPost_Processing.glsl" />
+    <None Include="Assets\Shaders\fragmentPost_Processing.glsl" />
   </ItemGroup>
 </Project>
