@@ -157,6 +157,7 @@
     <ClInclude Include="src\graphics\ResourceManager.h" />
     <ClInclude Include="src\graphics\SpriteRenderer.h" />
     <ClInclude Include="src\Particle.h" />
+    <ClInclude Include="src\powerUp.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\fragmentParticleShader.glsl" />

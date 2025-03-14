@@ -6,23 +6,26 @@
 #include <glm/glm.hpp> // математика
 #include "gameLevel.h"
 #include "BallObject.h"
+#include "powerUp.hpp"
 #include <tuple>
 
 
 
+// Represents the current state of the game
 enum GameState{
 	GAME_ACTIVE,
 	GAME_MENU,
 	GAME_WIN
 };
-
+// Represents the four possible (collision) directions
 enum Direction {
 	UP,
 	RIGHT,
 	DOWN,
 	LEFT
 };
-typedef std::tuple<bool, Direction, glm::vec2> Collision;
+// Defines a Collision typedef that represents collision data
+typedef std::tuple<bool, Direction, glm::vec2> Collision; // <collision?, what direction?, difference vector center - closest point>
 
 
 bool CheckCollision(GameObject& one, GameObject& two); //AABB - AABB collision
@@ -30,8 +33,10 @@ Collision CheckCollision(BallObject& ball, GameObject& two); // Circle -AABB col
 //float clamp(float value, float min, float max);
 
 Direction VectorDirection(glm::vec2 target); // <collision?, what direction?, difference vector center - closest point>
+bool isOtherPowerUpActive(std::vector<PowerUp>& powerUpds, std::string type);
 
-
+bool ShouldSpawn(unsigned int chance);
+void ActivatePowerUp(PowerUp& powerUp);
 class Game{
 public:
 	//game state
@@ -55,6 +60,11 @@ public:
 	// reset
 	void ResetLevel();
 	void ResetPlayer();
+
+	std::vector<PowerUp> PowerUps;
+	void SpawnPowerUps(GameObject& block);
+	void UpdatePowerUps(float dt_);
+
 };
 
 #endif // !GAME_H
