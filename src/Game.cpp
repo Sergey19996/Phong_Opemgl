@@ -4,13 +4,25 @@
 #include "Particle.h"
 #include "postProcessor.h"
 #include "glm/glm.hpp"
-
+#include "audio/SoundDevice.h"
+#include "audio/SoundBuffer.h"
+#include "audio/SoundSource.h"
+#include <iostream>
 // Game-related State data
 SpriteRenderer* Renderer;
 GameObject* Player;
 BallObject* Ball;
 ParticleGenerator* Particles;
 PostProcessor* Effects;
+SoundDevice* MySoundDevice;
+
+SoundSource backgroundMusic;
+SoundSource objectSpeaker;
+SoundSource PowerSpeaker;
+SoundSource SolidSpeaker;
+
+const int MAXSPEAKERS = 5;
+SoundSource Speakers[MAXSPEAKERS];
 
 // Initial size of the player paddle
 const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);    // определение коснтант таким образом, будут доступны только тут 
@@ -22,6 +34,16 @@ const glm::vec2 INITIAL_BALL_VELOCITY(100.0f, -350.0f);
 // Radius of the ball object
 const float BALL_RADIUS = 12.5f;
 float ShakeTime = 0.0f;
+
+enum Sounds
+{
+	S_BACKGROUND, 
+	S_BRICKCOLLISION,
+	S_POWERUP,
+	S_SOLIDCOLLISION,
+	S_PADDLESOUND
+};
+
 
 Game::Game(unsigned int width, unsigned int height) : Width(width),Height(height),Keys(),State(GAME_ACTIVE)
 {
@@ -36,6 +58,29 @@ Game::~Game()
 }
 
 void Game::Init(){
+
+	
+	MySoundDevice = SoundDevice::get();
+	uint32_t /*ALuint*/ Sound1 = SoundBuffer::get()->addSoundEffect("Assets/audio/breakout.mp3");
+	uint32_t /*ALuint*/ objectsound = SoundBuffer::get()->addSoundEffect("Assets/audio/bleep.wav");
+	uint32_t /*ALuint*/ U_PowerUp = SoundBuffer::get()->addSoundEffect("Assets/audio/powerup.wav");
+	uint32_t /*ALuint*/ U_SolidCollision = SoundBuffer::get()->addSoundEffect("Assets/audio/solid.wav");
+	uint32_t /*ALuint*/ U_paddleSound = SoundBuffer::get()->addSoundEffect("Assets/audio/bleep.mp3");
+
+	sounds.push_back(Sound1);  //0
+	sounds.push_back(objectsound); //1
+	sounds.push_back(U_PowerUp); //2
+	sounds.push_back(U_SolidCollision);//3
+	sounds.push_back(U_paddleSound); // 4
+	for (int i = 0; i < MAXSPEAKERS; i++)
+	{
+		Speakers[i].generate();
+	}
+	//backgroundMusic.generate();
+	//objectSpeaker.generate();
+	//PowerSpeaker.generate();
+	Speakers[S_BACKGROUND].Play(sounds[S_BACKGROUND]);
+	
 
 	//load shaders
 	ResourceManager::LoadShader("Assets/Shaders/vertexShader.glsl", "Assets/Shaders/fragmentShader.glsl", nullptr, "sprite");
@@ -68,6 +113,7 @@ void Game::Init(){
 	Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
 	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
 	Effects = new PostProcessor(ResourceManager::GetShader("Post_Processing"), this->Width, this->Height);
+
 	//load levels
 	GameLevel one; one.Load("Assets/levels/one.lvl", this->Width, this->Height / 2);
 	GameLevel two; two.Load("Assets/levels/two.lvl", this->Width, this->Height / 2);
@@ -87,7 +133,7 @@ void Game::Init(){
 	glm::vec2 ballPos = playerPos + glm::vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS, -BALL_RADIUS * 2.0f);
 	Ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY, ResourceManager::GetTexture("face"));
 
-
+	
 	
 }
 
@@ -200,18 +246,19 @@ void Game::DoCollisions(){
 			Collision collision = CheckCollision(*Ball, box);
 			if (std::get<0>(collision)) // if collision is true
 			{
-				
+			
 			
 				//destroy block if not solid
 				if (!box.IsSolid ) {
 					box.Destroyed = true;
 					this->SpawnPowerUps(box);
-					
+					Speakers[S_BRICKCOLLISION].Play(sounds[S_BRICKCOLLISION]);
 				}
 				else
 				{//if block is solid, enable shake effect
 					ShakeTime = 0.05f;
 					Effects->Shake = true;
+					Speakers[S_SOLIDCOLLISION].Play(sounds[S_SOLIDCOLLISION]);
 				}
 				//
 					//collision resolution
@@ -220,6 +267,7 @@ void Game::DoCollisions(){
 				if (!(Ball->PassThrough && !box.IsSolid)) // don't do collision resolution on non-solid bricks if pass-through is activated
 				if (dir == LEFT || dir == RIGHT) // horizontal collision
 				{
+					
 					Ball->Velocity.x = -Ball->Velocity.x; // reverse horizontal velocity
 					//relocate 
 					float penetration = Ball->Radius - std::abs(diff_vector.x); // Отнимаем от радиуса расстояние до ближайшей точки на AABB
@@ -260,6 +308,7 @@ void Game::DoCollisions(){
 				Ball->Velocity.y = -1.0f * abs(Ball->Velocity.y);
 				Ball->Velocity = glm::normalize(Ball->Velocity) * glm::length(oldVelocity); // удлинит 
 				Ball->Stuck = Ball->Sticky;
+				Speakers[S_PADDLESOUND].Play(sounds[S_PADDLESOUND]);
 			}
 
 
@@ -271,6 +320,7 @@ void Game::DoCollisions(){
 	for (PowerUp& powerUp : this->PowerUps)
 	{
 		if (!powerUp.Destroyed) {
+			
 			// first check if powerup passed bottom edge, if so: keep as inactive and destroy
 			if (powerUp.Position.y >= this->Height) // если поверап ниже ширирны экрана
 				powerUp.Destroyed = true;
@@ -280,7 +330,7 @@ void Game::DoCollisions(){
 				ActivatePowerUp(powerUp);
 				powerUp.Destroyed = true;
 				powerUp.Activated = true;
-
+				Speakers[S_POWERUP].Play(sounds[S_POWERUP]);
 
 			}
 

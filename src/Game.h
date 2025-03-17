@@ -62,6 +62,7 @@ public:
 	void ResetPlayer();
 
 	std::vector<PowerUp> PowerUps;
+	std::vector<uint32_t> sounds;
 	void SpawnPowerUps(GameObject& block);
 	void UpdatePowerUps(float dt_);
 

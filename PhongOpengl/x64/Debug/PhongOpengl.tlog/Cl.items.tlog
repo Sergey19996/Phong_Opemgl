@@ -1,4 +1,7 @@
 D:\C++\Learning\PhongOpengl\Linking\lib\stb.cpp;D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\stb.obj
+D:\C++\Learning\PhongOpengl\src\audio\SoundSource.cpp;D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\SoundSource.obj
+D:\C++\Learning\PhongOpengl\src\audio\SoundBuffer.cpp;D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\SoundBuffer.obj
+D:\C++\Learning\PhongOpengl\src\audio\SoundDevice.cpp;D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\SoundDevice.obj
 D:\C++\Learning\PhongOpengl\src\BallObject.cpp;D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\BallObject.obj
 D:\C++\Learning\PhongOpengl\src\Game.cpp;D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\Game.obj
 D:\C++\Learning\PhongOpengl\src\gameLevel.cpp;D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\gameLevel.obj

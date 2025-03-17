@@ -1,0 +1,2 @@
+﻿main.obj : error LNK2001: unresolved external symbol "char const * __cdecl av_version_info(void)" (?av_version_info@@YAPEBDXZ)
+D:\C++\Learning\PhongOpengl\x64\Release\PhongOpengl.exe : fatal error LNK1120: 1 unresolved externals

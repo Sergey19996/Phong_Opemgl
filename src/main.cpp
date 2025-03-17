@@ -4,6 +4,25 @@
 #include "Game.h"
 #include "graphics/ResourceManager.h"
 
+//bool checkFFmpegConnection() {
+//	// В последних версиях FFmpeg регистрация не требуется
+//	// av_register_all();  // Убираем это для новых версий
+//
+//	// Получение информации о версии FFmpeg
+//	const char* version = av_version_info();
+//
+//	// Проверка, получена ли информация о версии
+//	if (version) {
+//		std::cout << "Success" << std::endl;
+//		return true;
+//	}
+//	else {
+//		std::cerr << "Wrong" << std::endl;
+//		return false;
+//	}
+//}
+
+
 //GLFW function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height); //изменение размера окна
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode); //событие на нажатие с клавиатуры
@@ -19,6 +38,8 @@ Game Breakout(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 
 int main(int argc, char* argv[]) {
+
+
 
 	glfwInit();
 

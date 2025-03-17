@@ -1,0 +1,9 @@
+D:\C++\Learning\PhongOpengl\x64\Debug\sndfile.dll
+D:\C++\Learning\PhongOpengl\x64\Debug\vorbisenc.dll
+D:\C++\Learning\PhongOpengl\x64\Debug\vorbis.dll
+D:\C++\Learning\PhongOpengl\x64\Debug\ogg.dll
+D:\C++\Learning\PhongOpengl\x64\Debug\FLAC.dll
+D:\C++\Learning\PhongOpengl\x64\Debug\opus.dll
+D:\C++\Learning\PhongOpengl\x64\Debug\mpg123.dll
+D:\C++\Learning\PhongOpengl\x64\Debug\libmp3lame.DLL
+D:\C++\Learning\PhongOpengl\PhongOpengl\x64\Debug\PhongOpe.957CB37C.Up2Date
