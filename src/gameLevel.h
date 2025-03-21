@@ -23,6 +23,9 @@ public:
 	void Draw(SpriteRenderer& render);
 	//check if the level si completed (all non-solid block are desptryed)
 	bool IsCompleted();
+
+
+
 private:
 	//initialzie level from tile data
 	void init(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight);

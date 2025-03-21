@@ -63,6 +63,9 @@
     <ClCompile Include="src\audio\SoundSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\TextRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\rendering\Shader.h">
@@ -107,6 +110,9 @@
     <ClInclude Include="src\audio\SoundSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\TextRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\vertexShader.glsl" />
@@ -115,5 +121,7 @@
     <None Include="Assets\Shaders\fragmentParticleShader.glsl" />
     <None Include="Assets\Shaders\vertexPost_Processing.glsl" />
     <None Include="Assets\Shaders\fragmentPost_Processing.glsl" />
+    <None Include="Assets\Shaders\text_2d_vs.glsl" />
+    <None Include="Assets\Shaders\text_2d_fs.glsl" />
   </ItemGroup>
 </Project>

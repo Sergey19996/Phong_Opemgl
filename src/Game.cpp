@@ -8,6 +8,8 @@
 #include "audio/SoundBuffer.h"
 #include "audio/SoundSource.h"
 #include <iostream>
+#include "TextRenderer.h"
+#include "sstream"
 // Game-related State data
 SpriteRenderer* Renderer;
 GameObject* Player;
@@ -15,6 +17,7 @@ BallObject* Ball;
 ParticleGenerator* Particles;
 PostProcessor* Effects;
 SoundDevice* MySoundDevice;
+TextRenderer* Text;
 
 SoundSource backgroundMusic;
 SoundSource objectSpeaker;
@@ -55,6 +58,9 @@ Game::~Game()
 	delete Player;
 	delete Ball;
 	delete Particles;
+	delete Text;
+	delete Effects;
+
 }
 
 void Game::Init(){
@@ -124,7 +130,7 @@ void Game::Init(){
 	this->Levels.push_back(three);
 	this->Levels.push_back(four);
 	this->Level = 0;
-
+	this->Lives = 1;
 
 	// configure game objects
 	glm::vec2 playerPos = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f,this->Height - PLAYER_SIZE.y);
@@ -133,11 +139,50 @@ void Game::Init(){
 	glm::vec2 ballPos = playerPos + glm::vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS, -BALL_RADIUS * 2.0f);
 	Ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY, ResourceManager::GetTexture("face"));
 
-	
+
+	Text = new TextRenderer(this->Width, this->Height);
+	Text->Load("Assets/fonts/OCRAEXT.ttf", 24);
 	
 }
 
 void Game::ProcessInput(float dt){
+
+	if (this->State == GAME_WIN) {
+
+		if (this->Keys[GLFW_KEY_ENTER] && !this->KeysProcessed[GLFW_KEY_ENTER])
+		{
+			this->KeysProcessed[GLFW_KEY_ENTER] = true;
+			Effects->Chaos = false;
+			this->State = GAME_MENU;
+
+		}
+
+	}
+
+	if (this->State == GAME_MENU) {
+
+		if (this->Keys[GLFW_KEY_ENTER] && !this->KeysProcessed[GLFW_KEY_ENTER]) {
+
+			this->State = GAME_ACTIVE;
+			this->KeysProcessed[GLFW_KEY_ENTER] = true;
+		}
+		if (this->Keys[GLFW_KEY_W] && !this->KeysProcessed[GLFW_KEY_W])
+		{
+			this->Level = (this->Level + 1) % 4;
+			this->KeysProcessed[GLFW_KEY_W] = true;
+		}
+		if (this->Keys[GLFW_KEY_S] && this->KeysProcessed[GLFW_KEY_S])
+		{
+			if (this->Level > 0)
+				--this->Level;
+			else
+				this->Level = 3;
+			this->KeysProcessed[GLFW_KEY_S] = true;
+
+
+		}
+
+	}
 
 	if (this->State == GAME_ACTIVE) {
 
@@ -192,7 +237,13 @@ void Game::Update(float dt)
 	// check loss condition
 	if (Ball->Position.y >= this->Height) // di ball reach bottom edge?
 	{
-		this->ResetLevel();
+		--this->Lives;
+		//fif the player loses all his lives ? : Game over
+		if (this->Lives == 0)
+		{
+			this->ResetLevel();
+			this->State = GAME_MENU;
+		}
 		this->ResetPlayer();
 	}
 	// reduce shake time
@@ -203,11 +254,20 @@ void Game::Update(float dt)
 		Effects->Shake = false;
 	}
 
+	if (this->State == GAME_ACTIVE && this->Levels[this->Level].IsCompleted()) {
+		this->ResetLevel();
+		this->ResetPlayer();
+		Effects->Chaos = true;
+		this->State = GAME_WIN;
+
+
+	}
+
 }
 
 void Game::Render()
 {
-	if (this->State == GAME_ACTIVE)
+	if (this->State == GAME_ACTIVE || this->State == GAME_MENU)
 	{
 		Effects->BeginRender();
 
@@ -232,6 +292,22 @@ void Game::Render()
 		Effects->EndRender();
 		// render postprocessing quad
 		Effects->Render(glfwGetTime());
+
+		std::stringstream ss; ss << this -> Lives;
+		Text->RenderText("Lives:" + ss.str(), 5.0f, 5.0f, 1.0f);
+	}
+	if (this->State == GAME_MENU) {
+
+		Text->RenderText("Press ENTER to start", 250.0f, Height / 2, 1.0f);
+		Text->RenderText("Press W or S to select level", 245.0f, Height / 2 + 20.0f, 0.75f);
+
+
+	}
+	if (this->State == GAME_WIN) {
+
+		Text->RenderText("You Won!!!", 320.0, Height / 2 - 20.0, 1.0, glm::vec3(0.0f, 1.0f, 0.0f));
+		Text->RenderText("Press ENTER to retry or Escape for quit", 130.0, Height / 2, 1.0, glm::vec3(1.0, 1.0, 0.0));
+
 
 	}
 	
@@ -350,7 +426,7 @@ void Game::ResetLevel(){
 		this->Levels[2].Load("Assets/levels/.lvl", this->Width, this->Height / 2);
 	else if (this->Level == 3)
 		this->Levels[3].Load("Assets/levels/.lvl", this->Width, this->Height / 2);
-	
+	this->Lives = 3;
 }
 
 void Game::ResetPlayer(){

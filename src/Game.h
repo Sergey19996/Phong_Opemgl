@@ -39,9 +39,12 @@ bool ShouldSpawn(unsigned int chance);
 void ActivatePowerUp(PowerUp& powerUp);
 class Game{
 public:
+	unsigned int Lives;
+
 	//game state
 	GameState State;
 	bool Keys[1024];
+	bool KeysProcessed[1024];
 	unsigned int Width, Height;
 	//Constructor/Destructor
 	Game(unsigned int width, unsigned int height);

@@ -1,5 +1,11 @@
 ﻿  Game.cpp
-D:\C++\Learning\PhongOpengl\src\Game.cpp(234,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\C++\Learning\PhongOpengl\src\Game.cpp(294,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\C++\Learning\PhongOpengl\src\Game.cpp(301,59): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+D:\C++\Learning\PhongOpengl\src\Game.cpp(308,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\C++\Learning\PhongOpengl\src\Game.cpp(309,77): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  main.cpp
+D:\C++\Learning\PhongOpengl\src\main.cpp(81,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   PhongOpengl.vcxproj -> D:\C++\Learning\PhongOpengl\x64\Debug\PhongOpengl.exe
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.
